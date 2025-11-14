@@ -29,9 +29,7 @@ pipeline {
 
 		stage('Tests unitaires') {
 			steps {
-				withEnv(["TESTCONTAINERS_DISABLED=true"]) {
-					bat 'mvn test -Dspring.profiles.active=ci'
-				}
+				bat 'mvn test'
 			}
 			post {
 				always {
