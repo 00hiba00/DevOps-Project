@@ -107,6 +107,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-docker-compose</artifactId>
         </dependency>
+
+        <!--
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>mysql</artifactId>
@@ -128,6 +130,12 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+        -->
+
+
+
+
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -174,5 +182,14 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>skip-docker-tests</id>
+            <properties>
+                <skipDockerTests>true</skipDockerTests>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
