@@ -28,7 +28,7 @@ pipeline {
 		stage('Tests unitaires') {
 			steps {
 				// execute tous les test unitaires JUnit
-				bat 'mvn test'
+				bat 'mvn test -Dspring.profiles.active=ci -Dtestcontainers.enabled=false'
 			}
 			post {
 				// meme si les tests echouent, jenkins publie le rapport
