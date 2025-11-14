@@ -25,17 +25,18 @@ pipeline {
 			}
 		}
 
+
+
 		stage('Tests unitaires') {
 			steps {
-				// execute tous les test unitaires JUnit
-				bat 'mvn clean test -Pskip-docker-tests -Dspring.profiles.active=ci'
+				withEnv(["TESTCONTAINERS_DISABLED=true"]) {
+					bat 'mvn test -Dspring.profiles.active=ci'
+				}
 			}
 			post {
-				// meme si les tests echouent, jenkins publie le rapport
 				always {
-					junit '*/target/surefire-reports/.xml'  // Rapports des tests
+					junit '**/target/surefire-reports/*.xml'
 				}
-				// lit les fichiers et affiche les resultas dans l'interface Jenkins
 			}
 		}
 
