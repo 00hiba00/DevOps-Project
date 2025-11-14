@@ -21,14 +21,14 @@ pipeline {
 
 		stage('Compiler') {
 			steps {
-				sh 'mvn clean compile'
+				bat 'mvn clean compile'
 			}
 		}
 
 		stage('Tests unitaires') {
 			steps {
 				// execute tous les test unitaires JUnit
-				sh 'mvn test'
+				bat 'mvn test'
 			}
 			post {
 				// meme si les tests echouent, jenkins publie le rapport
@@ -42,7 +42,7 @@ pipeline {
 		// ceci cree un fichier executable qui va etre utilisé pour Docker et le deploiement sur Kubernetes
 		stage('Générer le package') {
 			steps {
-				sh 'mvn package'
+				bat 'mvn package'
 			}
 		}
 
