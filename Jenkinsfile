@@ -36,6 +36,7 @@ pipeline {
 					junit '**/target/surefire-reports/*.xml'
 				}
 			}
+			//
 		}
 
 		// ceci cree un fichier executable qui va etre utilisé pour Docker et le deploiement sur Kubernetes
