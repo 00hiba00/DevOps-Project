@@ -44,6 +44,7 @@ pipeline {
 				bat 'mvn package'
 			}
 		}
+		// le package dans $JENKINS_HOME/workspace/<NOM_DU_JOB>/target/
 
 	}
 
