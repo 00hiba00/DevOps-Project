@@ -45,38 +45,24 @@ pipeline {
 				bat 'mvn package'
 			}
 		}
-		// le package dans $JENKINS_HOME/workspace/<NOM_DU_JOB>/target/
-
-		/*stage('SonarQube Analysis') {
-			environment {
-				scannerHome = tool 'sonar-scanner'  // li kayna f tools
-			}
-			steps {
-				withSonarQubeEnv('sonar-server') {  // li kayn f Systems
-					bat "mvn sonar:sonar -Dsonar.projectKey=bookstore -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonar-token}"
-				}
-			}
-		}*/
 
 		stage('SonarQube Analysis') {
 			environment {
 				scannerHome = tool 'sonar-scanner'  // li kayna f tools
 			}
 			steps {
-					withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
-						withSonarQubeEnv('sonar-server') {
-							bat """
+				withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
+					withSonarQubeEnv('sonar-server') {
+						bat """
 				mvn sonar:sonar ^
 					-Dsonar.projectKey=bookstore ^
 					-Dsonar.host.url=http://localhost:9000 ^
 					-Dsonar.login=%SONAR_AUTH_TOKEN%
 				"""
-						}
+					}
 				}
 			}
 		}
-
-
 	}
 
 	// le message s'affiche dans les logs
@@ -86,3 +72,15 @@ pipeline {
 		}
 	}
 }
+
+
+/*stage('SonarQube Analysis') {
+		environment {
+			scannerHome = tool 'sonar-scanner'  // li kayna f tools
+		}
+		steps {
+			withSonarQubeEnv('sonar-server') {  // li kayn f Systems
+				bat "mvn sonar:sonar -Dsonar.projectKey=bookstore -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonar-token}"
+			}
+		}
+	}*/
