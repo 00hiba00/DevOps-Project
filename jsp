@@ -61,7 +61,7 @@ pipeline {
 		}
 	}
 
-	// le message s'affiche dans les logs
+	// le message s'affiche dans les logs, maert !!!
 	post {
 		always {
 			echo 'Pipeline terminé.'
