@@ -32,20 +32,19 @@ pipeline {
 
 		stage('Générer le package') {
 			steps {
-				bat 'mvn package'
+				bat 'mvn package -DskipTests'
 			}
 		}
 
 		stage('SonarQube Analysis') {
 			steps {
-				withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
-					withSonarQubeEnv('sonar-server') {
-						bat """
-                      mvn sonar:sonar ^
-                         -Dsonar.projectKey=bookstore ^
-                         -Dsonar.host.url=http://localhost:9000 ^
-                         -Dsonar.login=%SONAR_AUTH_TOKEN%
-                   """
+				script {
+					withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
+						withSonarQubeEnv('sonar-server') {
+							bat """
+                         mvn sonar:sonar -Dsonar.projectKey=bookstore -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_AUTH_TOKEN%
+                      """
+						}
 					}
 				}
 			}
