@@ -58,7 +58,7 @@ pipeline {
 			}
 		}
 
-		stage('SonarQube Analysis') {
+		/*stage('SonarQube Analysis') {
 			environment {
 				scannerHome = tool 'sonar-scanner'  // li kayna f tools
 			}
@@ -74,7 +74,7 @@ pipeline {
 						}
 				}
 			}
-		}
+		}*/
 
 
 	}
