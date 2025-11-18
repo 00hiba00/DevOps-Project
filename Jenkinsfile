@@ -21,7 +21,7 @@ pipeline {
 
 		stage('Tests unitaires') {
 			steps {
-				bat 'mvn test'
+				bat 'mvn clean test jacoco:report'
 			}
 			post {
 				always {
