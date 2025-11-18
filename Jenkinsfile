@@ -47,6 +47,17 @@ pipeline {
 		}
 		// le package dans $JENKINS_HOME/workspace/<NOM_DU_JOB>/target/
 
+		stage('SonarQube Analysis') {
+			environment {
+				scannerHome = tool 'sonar-scanner'  // li kayna f tools
+			}
+			steps {
+				withSonarQubeEnv('sonar-server') {  // li kayn f Systems
+					bat "mvn sonar:sonar -Dsonar.projectKey=bookstore -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonar-token}"
+				}
+			}
+		}
+
 	}
 
 	// le message s'affiche dans les logs
