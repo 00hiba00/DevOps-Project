@@ -40,7 +40,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Verify whether returned BookDto is valid when calling save() method")
-    public void saveBook_WithValidRequestDto_ShouldReturnValidBookDto() {
+    void saveBook_WithValidRequestDto_ShouldReturnValidBookDto() {
         // Given
         Category testCategory = new Category();
         testCategory.setId(1L);
