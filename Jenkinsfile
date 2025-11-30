@@ -96,15 +96,13 @@ pipeline {
 			steps {
 				script {
 					echo 'Déploiement sur Kubernetes...'
-					withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-						bat """
-                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/secrets.yaml
-                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/pvc.yaml
-                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/deployment.yaml
-                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/service.yaml
-                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/ingress.yaml
-                   """
-					}
+					bat """
+            minikube kubectl -- apply -f k8s/secrets.yaml
+            minikube kubectl -- apply -f k8s/pvc.yaml
+            minikube kubectl -- apply -f k8s/deployment.yaml
+            minikube kubectl -- apply -f k8s/service.yaml
+            minikube kubectl -- apply -f k8s/ingress.yaml
+         """
 				}
 			}
 		}
@@ -114,10 +112,10 @@ pipeline {
 				script {
 					echo 'Vérification du déploiement...'
 					bat """
-                   kubectl get pods -l app=bookstore
-                   kubectl get services
-                   kubectl rollout status deployment/bookstore-app --timeout=5m
-                """
+            minikube kubectl -- get pods -l app=bookstore
+            minikube kubectl -- get services
+            minikube kubectl -- rollout status deployment/bookstore-app --timeout=5m
+         """
 				}
 			}
 		}
