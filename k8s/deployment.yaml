@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: bookstore
-        image: bookstore-app:latest
-        imagePullPolicy: IfNotPresent
+        image: alaelmh/bookstore-app:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 9090
         env:
