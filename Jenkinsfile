@@ -10,11 +10,7 @@ pipeline {
 		DOCKER_HOST = 'tcp://localhost:2375'
 		DOCKER_IMAGE = 'bookstore-app'
 		DOCKER_TAG = "${BUILD_NUMBER}"
-		//DOCKER_REGISTRY = 'docker.io'  // Changez si vous utilisez un autre registry
-		//DOCKER_CREDENTIALS_ID = 'dockerhub-credentials'  // ID des credentials Docker Hub dans Jenkins
 		DOCKER_USER = 'alaelmh'
-		//KUBECONFIG_CREDENTIALS_ID = 'kubeconfig'  // ID du fichier kubeconfig dans Jenkins
-
 	}
 
 
