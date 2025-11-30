@@ -96,13 +96,15 @@ pipeline {
 			steps {
 				script {
 					echo 'Déploiement sur Kubernetes...'
-					bat """
-                   kubectl apply -f k8s/secrets.yaml
-                   kubectl apply -f k8s/pvc.yaml
-                   kubectl apply -f k8s/deployment.yaml
-                   kubectl apply -f k8s/service.yaml
-                   kubectl apply -f k8s/ingress.yaml
-                """
+					withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+						bat """
+                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/secrets.yaml
+                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/pvc.yaml
+                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/deployment.yaml
+                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/service.yaml
+                      kubectl --kubeconfig=%KUBECONFIG% apply -f k8s/ingress.yaml
+                   """
+					}
 				}
 			}
 		}
