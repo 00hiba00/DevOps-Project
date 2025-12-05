@@ -81,3 +81,4 @@ spec:
       - name: mysql-storage
         persistentVolumeClaim:
           claimName: mysql-pvc
+#added modification pour l'integration continue automatique avec Jenkins en utilisant le webHook sur Github
