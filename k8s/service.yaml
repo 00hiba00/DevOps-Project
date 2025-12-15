@@ -9,7 +9,8 @@ spec:
   selector:
     app: bookstore
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 9090
       targetPort: 9090
 ---
